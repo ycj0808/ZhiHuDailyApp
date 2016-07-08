@@ -1,7 +1,6 @@
 package com.android.ice.zhihudaily.mvp.base.activity;
 
 import android.os.Bundle;
-
 import com.hannesdorfmann.mosby.mvp.MvpActivity;
 import com.hannesdorfmann.mosby.mvp.MvpPresenter;
 import com.hannesdorfmann.mosby.mvp.MvpView;
