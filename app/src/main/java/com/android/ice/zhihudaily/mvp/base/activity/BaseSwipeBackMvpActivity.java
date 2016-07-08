@@ -3,11 +3,19 @@ package com.android.ice.zhihudaily.mvp.base.activity;
 import android.annotation.TargetApi;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.LayoutRes;
+import android.support.v7.widget.Toolbar;
 import android.view.KeyEvent;
+import android.view.View;
+import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
+
 import com.android.ice.zhihudaily.R;
 import com.android.ice.zhihudaily.support.swipeback.SwipeBackLayout;
+import com.android.ice.zhihudaily.support.widget.FlatButton;
 import com.hannesdorfmann.mosby.mvp.MvpPresenter;
 import com.hannesdorfmann.mosby.mvp.MvpView;
 import com.readystatesoftware.systembartint.SystemBarTintManager;
@@ -20,6 +28,16 @@ import com.readystatesoftware.systembartint.SystemBarTintManager;
 public abstract class BaseSwipeBackMvpActivity<V extends MvpView,P extends MvpPresenter<V>> extends MvpSwipeBackActivity<V, P> {
 
     protected SwipeBackLayout mSwipeBackLayout;
+    protected View emptyLayout;
+    protected FlatButton layoutReload;
+    protected Toolbar mToolbar;
+    protected TextView mToolBarTitle;
+
+    private boolean canBack=true;
+
+    public void setCanBack(boolean canBack) {
+        this.canBack = canBack;
+    }
 
     /**
      * 返回按键
@@ -39,11 +57,57 @@ public abstract class BaseSwipeBackMvpActivity<V extends MvpView,P extends MvpPr
         super.onCreate(savedInstanceState);
         initSystemBar();
         if(getLayoutId()==0){
-
+            super.setContentView(R.layout.activity_base);
         }else{
             super.setContentView(getLayoutId());
         }
+        mSwipeBackLayout=getSwipeBackLayout();
+        afterCreate(savedInstanceState);
+    }
 
+    @Override
+    public void setContentView(@LayoutRes int layoutResID) {
+        super.setContentView(layoutResID);
+    }
+
+    @Override
+    public void setContentView(View view) {
+        RelativeLayout rootLayout= (RelativeLayout) findViewById(R.id.root_view);
+        emptyLayout=findViewById(R.id.layoutEmpty);
+        layoutReload= (FlatButton) emptyLayout.findViewById(R.id.layoutReload);
+        emptyLayout.setVisibility(View.GONE);
+        if(rootLayout==null) return;
+        rootLayout.addView(view,new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
+        initToolBar();
+    }
+
+    private void initToolBar(){
+        mToolbar= (Toolbar) findViewById(R.id.toolBar);
+        if(mToolbar!=null){
+            setSupportActionBar(mToolbar);
+            mToolBarTitle= (TextView) mToolbar.findViewById(R.id.toolBarTitle);
+            if(mToolBarTitle==null){
+                mToolBarTitle= (TextView) findViewById(R.id.toolBarTitle);
+            }
+            if(mToolBarTitle!=null&&getSupportActionBar()!=null){
+                getSupportActionBar().setDisplayShowTitleEnabled(false);
+            }
+            if(canBack){
+                mToolbar.setNavigationIcon(R.drawable.ic_back);
+            }
+        }
+    }
+
+    @Override
+    protected void onTitleChanged(CharSequence title, int color) {
+        super.onTitleChanged(title, color);
+        if(mToolBarTitle!=null){
+            mToolBarTitle.setText(title);
+        }
+    }
+
+    public Toolbar getmToolbar() {
+        return mToolbar;
     }
 
     private void initSystemBar(){
