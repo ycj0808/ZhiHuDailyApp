@@ -3,4 +3,7 @@
     <item name="commAppbarLayout" type="id" />
     <item name="toolBarTitle" type="id" />
     <item name="toolBar" type="id" />
+
+    <item name="txtLoadFailed" type="id" />
+    <item name="layoutReload" type="id" />
 </resources>
