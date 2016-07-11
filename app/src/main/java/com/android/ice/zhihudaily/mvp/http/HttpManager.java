@@ -22,9 +22,9 @@ import retrofit2.converter.gson.GsonConverterFactory;
  * Created by yangchj on 2016/6/8 0008.
  * email:yangchj@neusoft.com
  */
-public class HttpService {
+public class HttpManager {
 
-    private final static String BASE_URL = "";
+    private final static String BASE_URL = "http://news-at.zhihu.com/api/7";
     private static Retrofit retrofit;
     private static OkHttpClient mOkHttpClient;
 
@@ -39,7 +39,7 @@ public class HttpService {
     public static final String CACHE_CONTROL_NETWORK = "max-age=0";
 
 
-    private HttpService(){
+    private HttpManager(){
         /*OkHttpClient okHttpClient=new OkHttpClient.Builder()
                 .addInterceptor(new HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY))
                 .build();*/
@@ -56,7 +56,7 @@ public class HttpService {
         HttpLoggingInterceptor interceptor=new HttpLoggingInterceptor();
         interceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
         if(mOkHttpClient==null){
-            synchronized (HttpService.class){
+            synchronized (HttpManager.class){
                 if(mOkHttpClient==null){
                     //指定缓存路径，缓存大小
                     Cache cache=new Cache(new File(App.getInstance().getCacheDir(),"HttpCache"),124*1024*100);
@@ -94,10 +94,10 @@ public class HttpService {
     };
 
     private static class HttpServiceHolder{
-        public static final HttpService INSTANCE=new HttpService();
+        public static final HttpManager INSTANCE=new HttpManager();
     }
 
-    public static HttpService getInstance(){
+    public static HttpManager getInstance(){
         return HttpServiceHolder.INSTANCE;
     }
 
