@@ -67,7 +67,7 @@ public abstract class BaseSwipeBackMvpActivity<V extends MvpView,P extends MvpPr
 
     @Override
     public void setContentView(@LayoutRes int layoutResID) {
-        super.setContentView(layoutResID);
+        setContentView(View.inflate(this, layoutResID, null));
     }
 
     @Override
