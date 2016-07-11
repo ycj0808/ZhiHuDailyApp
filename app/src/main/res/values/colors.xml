@@ -12,5 +12,9 @@
     <color name="disable_hint_black">#BDBDBD</color>
     <color name="line_divider">#E0E0E0</color>
 
+    <color name="common_bg">#E0E0E0</color>
+
+    <color name="main_item_background_Day">#FFFFFF</color>
+
     <color name="white">#FFFFFF</color>
 </resources>

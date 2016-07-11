@@ -19,6 +19,8 @@ import com.hannesdorfmann.mosby.mvp.MvpPresenter;
 import com.hannesdorfmann.mosby.mvp.MvpView;
 import com.readystatesoftware.systembartint.SystemBarTintManager;
 
+import butterknife.ButterKnife;
+
 /**
  * 基类继承了SwipeBack类
  * Created by yangchj on 2016/7/7 0007.
@@ -45,6 +47,7 @@ public abstract class BaseMvpActivity<V extends MvpView,P extends MvpPresenter<V
         }else{
             super.setContentView(getLayoutId());
         }
+        ButterKnife.bind(this);
         afterCreate(savedInstanceState);
     }
 

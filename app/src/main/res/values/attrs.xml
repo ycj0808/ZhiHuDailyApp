@@ -5,6 +5,8 @@
     <attr name="themePrimary" format="reference|color"></attr>
     <attr name="themePrimaryDark" format="reference|color"></attr>
 
+    <attr name="main_item_background" format="color"/>
+
     <!--flat样式的TextView-->
     <attr name="flat_text" format="reference|color"/>
 
