@@ -35,11 +35,11 @@ public class LastNewsRxPresenter extends NullObjRxBasePresenter<LastNewsView> im
                 .subscribe(new Action1<NewsList>() {
                     @Override
                     public void call(NewsList newsList) {
-                        if(isViewAttached()){
+                        /*if(isViewAttached()){
                             if(newsList!=null){
                                 getView().setData(newsList);
                             }
-                        }
+                        }*/
                     }
                 }, new Action1<Throwable>() {
                     @Override

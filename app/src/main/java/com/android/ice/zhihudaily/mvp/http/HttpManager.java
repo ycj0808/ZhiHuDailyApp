@@ -22,7 +22,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
  */
 public class HttpManager {
 
-    private final static String BASE_URL = "http://news-at.zhihu.com/api/7";
+    private final static String BASE_URL = "http://news-at.zhihu.com/api/7/";
     private static Retrofit.Builder retrofit;
     private static OkHttpClient mOkHttpClient;
 

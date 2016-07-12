@@ -1,6 +1,8 @@
 package com.android.ice.zhihudaily.mvp.base.activity;
 
 import android.annotation.TargetApi;
+import android.app.ProgressDialog;
+import android.content.Context;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.LayoutRes;
@@ -19,8 +21,6 @@ import com.hannesdorfmann.mosby.mvp.MvpPresenter;
 import com.hannesdorfmann.mosby.mvp.MvpView;
 import com.readystatesoftware.systembartint.SystemBarTintManager;
 
-import butterknife.ButterKnife;
-
 /**
  * 基类继承了SwipeBack类
  * Created by yangchj on 2016/7/7 0007.
@@ -34,13 +34,14 @@ public abstract class BaseMvpActivity<V extends MvpView,P extends MvpPresenter<V
     protected TextView mToolBarTitle;
 
     private boolean canBack=true;
-
+    protected Context mContext;
     public void setCanBack(boolean canBack) {
         this.canBack = canBack;
     }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        mContext=this;
         initSystemBar();
         if(getLayoutId()==0){
             super.setContentView(R.layout.activity_base);
@@ -48,6 +49,7 @@ public abstract class BaseMvpActivity<V extends MvpView,P extends MvpPresenter<V
             super.setContentView(getLayoutId());
         }
         afterCreate(savedInstanceState);
+        requestData();
     }
 
     @Override
@@ -122,4 +124,36 @@ public abstract class BaseMvpActivity<V extends MvpView,P extends MvpPresenter<V
 
     protected abstract int getLayoutId();
     protected abstract void afterCreate(Bundle savedInstanceState);
+    protected abstract void requestData();
+
+    protected ProgressDialog mDialog;
+
+    protected void showLoadingDialog(String title,String msg){
+        if(mDialog!=null){
+            mDialog.dismiss();
+            mDialog=null;
+        }
+        mDialog=ProgressDialog.show(mContext,title,msg,true,true);
+    }
+
+    protected void showLoadingDialog(String msg){
+        if(mDialog!=null){
+            mDialog.dismiss();
+            mDialog=null;
+        }
+        mDialog=ProgressDialog.show(mContext,"",msg,true,true);
+    }
+
+    protected void dissmissDialog(){
+        if(mDialog!=null){
+            mDialog.dismiss();
+            mDialog=null;
+        }
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        dissmissDialog();
+    }
 }

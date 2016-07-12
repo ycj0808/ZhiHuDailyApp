@@ -1,6 +1,6 @@
 package com.android.ice.zhihudaily.ui.adapter;
 
-import android.content.Context;
+import android.support.v7.widget.RecyclerView;
 import android.widget.ImageView;
 
 import com.android.ice.zhihudaily.R;
@@ -9,17 +9,17 @@ import com.bumptech.glide.Glide;
 
 import java.util.List;
 
-import cn.bingoogolapple.androidcommon.adapter.BGAAdapterViewAdapter;
+import cn.bingoogolapple.androidcommon.adapter.BGARecyclerViewAdapter;
 import cn.bingoogolapple.androidcommon.adapter.BGAViewHolderHelper;
 
 /**
  * 最新消息
  * Created by yangchj on 16/7/11.
  */
-public class LastNewsAdapter extends BGAAdapterViewAdapter<News>{
+public class LastNewsAdapter extends BGARecyclerViewAdapter<News> {
 
-    public LastNewsAdapter(Context context) {
-        super(context, R.layout.item_last_news);
+    public LastNewsAdapter(RecyclerView recyclerView) {
+        super(recyclerView, R.layout.item_last_news);
     }
 
     @Override
