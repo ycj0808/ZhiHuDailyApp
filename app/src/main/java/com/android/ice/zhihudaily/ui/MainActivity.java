@@ -41,17 +41,11 @@ public class MainActivity extends BaseMvpActivity<LastNewsView, LastNewsRxPresen
     @NonNull
     @Override
     public LastNewsRxPresenter createPresenter() {
-        return null;
+        return new LastNewsRxPresenter();
     }
 
     @Override
     public void showLoading(boolean pullToRefresh) {
-
-    }
-
-    @Override
-    public void showContent() {
-
     }
 
     @Override
@@ -61,11 +55,6 @@ public class MainActivity extends BaseMvpActivity<LastNewsView, LastNewsRxPresen
 
     @Override
     public void setData(NewsList data) {
-
-    }
-
-    @Override
-    public void loadData(boolean pullToRefresh) {
 
     }
 }

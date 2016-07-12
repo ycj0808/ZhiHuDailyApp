@@ -2,11 +2,9 @@ package com.android.ice.zhihudaily.mvp.http;
 
 import com.android.ice.zhihudaily.App;
 import com.android.ice.zhihudaily.support.utils.NetUtil;
-
 import java.io.File;
 import java.io.IOException;
 import java.util.concurrent.TimeUnit;
-
 import okhttp3.Cache;
 import okhttp3.CacheControl;
 import okhttp3.Interceptor;
@@ -25,7 +23,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class HttpManager {
 
     private final static String BASE_URL = "http://news-at.zhihu.com/api/7";
-    private static Retrofit retrofit;
+    private static Retrofit.Builder retrofit;
     private static OkHttpClient mOkHttpClient;
 
     //短缓存有效期为1分钟
@@ -45,10 +43,8 @@ public class HttpManager {
         initOkHttpClient();
         retrofit=new Retrofit.Builder()
                 .baseUrl(BASE_URL)
-                .client(mOkHttpClient)
                 .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
-                .addConverterFactory(GsonConverterFactory.create())
-                .build();
+                .addConverterFactory(GsonConverterFactory.create());
     }
 
     private void initOkHttpClient(){
@@ -101,6 +97,6 @@ public class HttpManager {
     }
 
     public <T> T createApi(Class<T> clazz){
-        return retrofit.create(clazz);
+        return retrofit.client(mOkHttpClient).build().create(clazz);
     }
 }
