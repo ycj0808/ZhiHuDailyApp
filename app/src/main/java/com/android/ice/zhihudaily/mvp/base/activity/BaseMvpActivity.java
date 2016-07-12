@@ -47,7 +47,6 @@ public abstract class BaseMvpActivity<V extends MvpView,P extends MvpPresenter<V
         }else{
             super.setContentView(getLayoutId());
         }
-        ButterKnife.bind(this);
         afterCreate(savedInstanceState);
     }
 

@@ -49,12 +49,22 @@ public class MainActivity extends BaseMvpActivity<LastNewsView, LastNewsRxPresen
     }
 
     @Override
+    public void showContent() {
+
+    }
+
+    @Override
     public void showError(Throwable e, boolean pullToRefresh) {
 
     }
 
     @Override
     public void setData(NewsList data) {
+
+    }
+
+    @Override
+    public void loadData(boolean pullToRefresh) {
 
     }
 }

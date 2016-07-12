@@ -3,13 +3,11 @@
     android:id="@+id/root_view"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/line_divider"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     >
 
-    <!--<include layout="@layout/comm_lay_emptyview" />
-    <include layout="@layout/comm_lay_loadfailed" />-->
+    <include layout="@layout/comm_lay_emptyview" />
 </RelativeLayout>
