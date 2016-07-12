@@ -38,7 +38,6 @@ public class LastNewsRxPresenter extends NullObjRxBasePresenter<LastNewsView> im
                         if(isViewAttached()){
                             if(newsList!=null){
                                 getView().setData(newsList);
-                                getView().showContent();
                             }
                         }
                     }

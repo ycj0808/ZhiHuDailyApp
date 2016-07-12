@@ -1,7 +1,6 @@
 package com.android.ice.zhihudaily.mvp.upload;
 
 import java.io.IOException;
-
 import okhttp3.MediaType;
 import okhttp3.RequestBody;
 import okio.Buffer;
