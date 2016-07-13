@@ -10,4 +10,5 @@ import com.hannesdorfmann.mosby.mvp.MvpPresenter;
  */
 public interface LastNewsPresenter extends MvpPresenter<LastNewsView>{
     public void loadLastNews(final boolean pullToRefresh);
+    public void loadBeforeNews(String date);
 }

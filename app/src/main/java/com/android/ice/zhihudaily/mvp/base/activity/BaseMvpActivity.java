@@ -144,7 +144,7 @@ public abstract class BaseMvpActivity<V extends MvpView,P extends MvpPresenter<V
         mDialog=ProgressDialog.show(mContext,"",msg,true,true);
     }
 
-    protected void dissmissDialog(){
+    protected void dismissDialog(){
         if(mDialog!=null){
             mDialog.dismiss();
             mDialog=null;
@@ -154,6 +154,6 @@ public abstract class BaseMvpActivity<V extends MvpView,P extends MvpPresenter<V
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        dissmissDialog();
+        dismissDialog();
     }
 }

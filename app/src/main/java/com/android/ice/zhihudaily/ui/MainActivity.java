@@ -13,6 +13,7 @@ import com.android.ice.zhihudaily.mvp.view.LastNewsView;
 import com.android.ice.zhihudaily.support.utils.Utils;
 import com.android.ice.zhihudaily.support.widget.RecycleViewDivider;
 import com.android.ice.zhihudaily.ui.adapter.LastNewsAdapter;
+import com.orhanobut.logger.Logger;
 
 import java.util.List;
 
@@ -30,9 +31,12 @@ public class MainActivity extends BaseMvpActivity<LastNewsView, LastNewsRxPresen
     RecyclerView rvNews;
 
     LastNewsAdapter newsAdapter;
+
+    String curDate;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setCanBack(false);
         setContentView(R.layout.activity_home);
         ButterKnife.bind(this);
         init();
@@ -45,6 +49,17 @@ public class MainActivity extends BaseMvpActivity<LastNewsView, LastNewsRxPresen
 
     @Override
     protected void afterCreate(Bundle savedInstanceState) {
+        if(savedInstanceState!=null&&savedInstanceState.containsKey("curDate")){
+            curDate=savedInstanceState.getString("curDate");
+        }
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        if(curDate!=null){
+            outState.putString("curDate",curDate);
+        }
     }
 
     protected void init() {
@@ -69,6 +84,12 @@ public class MainActivity extends BaseMvpActivity<LastNewsView, LastNewsRxPresen
         }
     }
 
+    private void loadMoreData(){
+        if(presenter!=null){
+            presenter.loadBeforeNews(curDate);
+        }
+    }
+
     @NonNull
     @Override
     public LastNewsRxPresenter createPresenter() {
@@ -82,15 +103,26 @@ public class MainActivity extends BaseMvpActivity<LastNewsView, LastNewsRxPresen
         }
     }
 
+    @Override
+    public void hideLoading() {
+        dismissDialog();
+    }
+
 
     @Override
-    public void showError(Throwable e, boolean pullToRefresh) {
-        dissmissDialog();
+    public void showError(Throwable e) {
+        dismissDialog();
     }
 
     @Override
     public void setData(List<News> data) {
-        dissmissDialog();
+        newsAdapter.setDatas(data);
+        dismissDialog();
+    }
+
+    @Override
+    public void showEmptyView(boolean flag) {
+
     }
 
     @Override
@@ -100,6 +132,33 @@ public class MainActivity extends BaseMvpActivity<LastNewsView, LastNewsRxPresen
 
     @Override
     public boolean onBGARefreshLayoutBeginLoadingMore(BGARefreshLayout refreshLayout) {
-        return false;
+        Logger.d("--------%s--------",curDate);
+        loadMoreData();
+        return true;
+    }
+
+    @Override
+    public void setCurrentDate(String curDate,boolean loadMore) {
+        this.curDate=curDate;
+        if(loadMore){
+            loadMoreData();
+        }
+    }
+
+    @Override
+    public void endRefresh(boolean flag) {
+        if(flag){
+            refreshLayout.endRefreshing();
+        }
+    }
+
+    @Override
+    public void addMoreData(List<News> newses) {
+        newsAdapter.addMoreDatas(newses);
+    }
+
+    @Override
+    public void endLoadMore() {
+        refreshLayout.endLoadingMore();
     }
 }

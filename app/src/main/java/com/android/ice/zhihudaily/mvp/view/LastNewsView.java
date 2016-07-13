@@ -11,4 +11,11 @@ import java.util.List;
  * email:yangchj@neusoft.com
  */
 public interface LastNewsView extends BaseMvpView<List<News>> {
+    public void setCurrentDate(String curDate,boolean loadMore);
+
+    public void endRefresh(boolean flag);
+
+    public void addMoreData(List<News> newses);
+
+    public void endLoadMore();
 }
