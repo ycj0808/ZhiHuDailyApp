@@ -4,6 +4,13 @@
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
 
+    <!--Toolbar字体颜色  -->
+    <color name="toolbar_Text_Color_Day">#DDFFFFFF</color>
+    <!--Toolbar-Menu字体颜色-->
+    <color name="toolbar_Menu_Text_Color_Day">#DD000000</color>
+    <!--Toolbar背景  -->
+    <color name="topbar_Background_Day">#303F9F</color>
+
     <color name="comm_transparent">#00000000</color>
     <color name="half_transparent">#80000000</color>
 

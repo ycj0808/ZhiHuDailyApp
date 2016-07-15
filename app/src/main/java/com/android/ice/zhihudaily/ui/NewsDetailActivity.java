@@ -15,7 +15,7 @@ import com.android.ice.zhihudaily.mvp.view.NewsDetailView;
 public class NewsDetailActivity extends BaseSwipeBackMvpActivity<NewsDetailView,NewsDetailRxPresenter> {
     @Override
     protected int getLayoutId() {
-        return 0;
+        return R.layout.activity_news_detail;
     }
     @Override
     protected void afterCreate(Bundle savedInstanceState) {
@@ -24,6 +24,6 @@ public class NewsDetailActivity extends BaseSwipeBackMvpActivity<NewsDetailView,
     @NonNull
     @Override
     public NewsDetailRxPresenter createPresenter() {
-        return null;
+        return new NewsDetailRxPresenter();
     }
 }
