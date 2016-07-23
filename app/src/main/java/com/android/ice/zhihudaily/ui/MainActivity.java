@@ -1,9 +1,14 @@
 package com.android.ice.zhihudaily.ui;
 
+import android.app.ActivityOptions;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ImageView;
 
 import com.android.ice.zhihudaily.R;
 import com.android.ice.zhihudaily.mvp.base.activity.BaseMvpActivity;
@@ -19,10 +24,11 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import cn.bingoogolapple.androidcommon.adapter.BGAOnRVItemClickListener;
 import cn.bingoogolapple.refreshlayout.BGANormalRefreshViewHolder;
 import cn.bingoogolapple.refreshlayout.BGARefreshLayout;
 
-public class MainActivity extends BaseMvpActivity<LastNewsView, LastNewsRxPresenter> implements LastNewsView, BGARefreshLayout.BGARefreshLayoutDelegate {
+public class MainActivity extends BaseMvpActivity<LastNewsView, LastNewsRxPresenter> implements LastNewsView, BGARefreshLayout.BGARefreshLayoutDelegate, BGAOnRVItemClickListener {
 
     @BindView(R.id.refreshLayout)
     BGARefreshLayout refreshLayout;
@@ -71,6 +77,7 @@ public class MainActivity extends BaseMvpActivity<LastNewsView, LastNewsRxPresen
         refreshLayout.setRefreshViewHolder(viewHolder);
         rvNews.setAdapter(newsAdapter);
         refreshLayout.setDelegate(this);
+        newsAdapter.setOnRVItemClickListener(this);
     }
 
     @Override
@@ -99,7 +106,7 @@ public class MainActivity extends BaseMvpActivity<LastNewsView, LastNewsRxPresen
     @Override
     public void showLoading(boolean pullToRefresh) {
         if(!pullToRefresh){
-            showLoadingDialog("数据加载中,请稍后...");
+            showLoadingDialog("数据加载中,请稍候...");
         }
     }
 
@@ -160,5 +167,24 @@ public class MainActivity extends BaseMvpActivity<LastNewsView, LastNewsRxPresen
     @Override
     public void endLoadMore() {
         refreshLayout.endLoadingMore();
+    }
+
+    @Override
+    public void onRVItemClick(ViewGroup viewGroup, View view, int i) {
+        News news=newsAdapter.getItem(i);
+        Bundle bundle=new Bundle();
+        bundle.putParcelable("news",news);
+        if(Build.VERSION.SDK_INT>=21){
+            ImageView shareView= (ImageView) view.findViewById(R.id.ivNews);
+            if(shareView!=null){
+                ActivityOptions options = ActivityOptions
+                        .makeSceneTransitionAnimation(MainActivity.this, shareView, "robot");
+                readGoWithOptions(NewsDetailActivity.class,bundle,options);
+            }else{
+                readyGo(NewsDetailActivity.class,bundle);
+            }
+        }else{
+            readyGo(NewsDetailActivity.class,bundle);
+        }
     }
 }
