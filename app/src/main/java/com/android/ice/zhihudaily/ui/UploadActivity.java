@@ -33,7 +33,7 @@ public class UploadActivity extends BaseSwipeBackMvpActivity<UploadView, UploadR
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setCanBack(false);
+        setCanBack(true);
         setContentView(R.layout.activity_upload);
         ButterKnife.bind(this);
         initProgressDialog();

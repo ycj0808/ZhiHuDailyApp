@@ -34,7 +34,7 @@ public class DownloadActivity extends BaseSwipeBackMvpActivity<DownloadView, Dow
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setCanBack(false);
+        setCanBack(true);
         setContentView(R.layout.activity_download);
         ButterKnife.bind(this);
         initProgressDialog();
