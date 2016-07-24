@@ -3,8 +3,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context=".ui.MainActivity">
     <item
-        android:id="@+id/action_settings"
+        android:id="@+id/action_download"
         android:orderInCategory="100"
-        android:title="@string/action_settings"
+        android:title="下载文件"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/action_upload"
+        android:orderInCategory="100"
+        android:title="上传文件"
         app:showAsAction="never" />
 </menu>

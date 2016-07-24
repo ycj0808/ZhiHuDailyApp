@@ -37,6 +37,14 @@
             android:label="纯净日报"
             android:screenOrientation="portrait"
             />
+        <activity android:name=".ui.DownloadActivity"
+            android:label="文件下载"
+            android:screenOrientation="portrait"
+            />
+        <activity android:name=".ui.UploadActivity"
+            android:label="文件上传"
+            android:screenOrientation="portrait"
+            />
     </application>
 
 </manifest>
