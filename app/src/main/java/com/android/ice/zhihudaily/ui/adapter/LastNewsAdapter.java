@@ -31,4 +31,5 @@ public class LastNewsAdapter extends BGARecyclerViewAdapter<News> {
         }
         bgaViewHolderHelper.setText(R.id.tvNews,news.getTitle());
     }
+
 }

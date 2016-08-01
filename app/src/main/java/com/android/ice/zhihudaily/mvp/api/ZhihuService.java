@@ -22,7 +22,7 @@ public interface ZhihuService {
 
     //消息内容获取与离线下载(消息详情)
     @Headers(HttpManager.CACHE_CONTROL_AGE+ HttpManager.CACHE_STALE_LONG)
-    @GET("news/id")
+    @GET("news/{id}")
     Observable<NewsDetail> getNewsDetail(@Path("id") int id);
 
     //过往消息

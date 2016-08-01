@@ -9,6 +9,8 @@ import com.hannesdorfmann.mosby.mvp.MvpView;
  */
 public interface DownloadView extends MvpView{
     public void startDownload();
-    public void setProgress(int progress);
+    public void setDownloadProgress(long bytesRead, long contentLength, boolean done);
+    public void downloadSuccess();
+    public void downloadFailure();
     public void endDownload();
 }

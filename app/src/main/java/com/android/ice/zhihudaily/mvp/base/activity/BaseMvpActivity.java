@@ -1,8 +1,10 @@
 package com.android.ice.zhihudaily.mvp.base.activity;
 
 import android.annotation.TargetApi;
+import android.app.ActivityOptions;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.LayoutRes;
@@ -125,6 +127,73 @@ public abstract class BaseMvpActivity<V extends MvpView,P extends MvpPresenter<V
     protected abstract int getLayoutId();
     protected abstract void afterCreate(Bundle savedInstanceState);
     protected abstract void requestData();
+
+
+    protected void readyGo(Class<?> clazz){
+        Intent intent=new Intent(this,clazz);
+        startActivity(intent);
+    }
+
+    protected void readyGo(Class<?> clazz,Bundle bundle){
+        Intent intent=new Intent(this,clazz);
+        if(null!=bundle){
+            intent.putExtras(bundle);
+        }
+        startActivity(intent);
+    }
+
+    protected void readGoWithOptions(Class<?> clazz,Bundle bundle,ActivityOptions options){
+        Intent intent=new Intent(this,clazz);
+        if(null!=bundle){
+            intent.putExtras(bundle);
+        }
+        if(Build.VERSION.SDK_INT<16){
+            startActivity(intent);
+        }else{
+            startActivity(intent,options.toBundle());
+        }
+    }
+
+    protected void readyGoThenKill(Class<?> clazz){
+        Intent intent = new Intent(this, clazz);
+        startActivity(intent);
+        finish();
+    }
+
+    protected void readyGoThenKill(Class<?> clazz,Bundle bundle){
+        Intent intent=new Intent(this,clazz);
+        if(null!=bundle){
+            intent.putExtras(bundle);
+        }
+        startActivity(intent);
+        finish();
+    }
+
+    /**
+     * 带有返回结果
+     *
+     * @param clazz
+     * @param requestCode
+     */
+    protected void readyGoForResult(Class<?> clazz, int requestCode) {
+        Intent intent = new Intent(this, clazz);
+        startActivityForResult(intent, requestCode);
+    }
+
+    /**
+     * 带有参数并返回结果
+     *
+     * @param clazz
+     * @param requestCode
+     * @param bundle
+     */
+    protected void readyGoForResult(Class<?> clazz, int requestCode, Bundle bundle) {
+        Intent intent = new Intent(this, clazz);
+        if (null != bundle) {
+            intent.putExtras(bundle);
+        }
+        startActivityForResult(intent, requestCode);
+    }
 
     protected ProgressDialog mDialog;
 
