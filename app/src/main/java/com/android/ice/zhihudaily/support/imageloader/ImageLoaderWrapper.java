@@ -16,7 +16,7 @@ public interface ImageLoaderWrapper {
      * @param imageFile
      * @param options
      */
-    public void displayImage(ImageView imageView, File imageFile, DisplayOption options);
+    public void displayImage(ImageView imageView, File imageFile,DisplayOption options);
 
     /**
      * 显示图片
@@ -24,7 +24,7 @@ public interface ImageLoaderWrapper {
      * @param imageUrl
      * @param option
      */
-    public void displayImage(ImageView imageView, String imageUrl, DisplayOption option);
+    public void displayImage(ImageView imageView, String imageUrl,DisplayOption option);
 
     /**
      * 显示图片
@@ -32,19 +32,16 @@ public interface ImageLoaderWrapper {
      * @param resId
      * @param option
      */
-    public void displayImage(ImageView imageView, int resId, DisplayOption option);
+    public void displayImage(ImageView imageView, int resId,DisplayOption option);
 
     /**
-     * 图片加载参数
+     * 清除指定缓存
+     * @param imageUrl
      */
-    public static class DisplayOption{
-        /**
-         * 加载中的资源id
-         */
-        public int loadingResId;
-        /**
-         * 加载失败的资源id
-         */
-        public int loadErrorResId;
-    }
+    public void cleanImageCache(String imageUrl);
+
+    /**
+     * 清楚缓存
+     */
+    public void cleanImageCache();
 }
